@@ -7,6 +7,7 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import com.example.wifi.enums.ServiceAction;
+import com.example.wifi.enums.ServiceState;
 
 public class WifiService extends Service {
 
@@ -14,9 +15,12 @@ public class WifiService extends Service {
     private boolean isServiceStarted = false;
     private PowerManager.WakeLock wakeLock;
 
+    private com.example.wifi.utils.Service ServiceUtils;
+
 
 
     public WifiService() {
+        ServiceUtils = new com.example.wifi.utils.Service();
     }
 
 
@@ -93,7 +97,7 @@ public class WifiService extends Service {
 
         isServiceStarted = true;
 
-        setServiceState(this, ServiceState.STARTED)
+        ServiceUtils.setState(this, ServiceState.STARTED);
 
         // we need this lock so our service gets not affected by Doze Mode
         wakeLock =
