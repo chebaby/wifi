@@ -107,6 +107,13 @@ public class WifiService extends Service {
             }
         }
 
+        if (SerialPortService.WAKELOCK == null) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            SerialPortService.WAKELOCK = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, SerialPortService.WL_TAG);
+            SerialPortService.WAKELOCK.acquire();
+            startService(new Intent(getApplicationContext(), SerialPortService.class));
+        }
+
         // we're starting a loop in a coroutine
         GlobalScope.launch(Dispatchers.IO) {
             while (isServiceStarted) {
