@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Wifi</string>
+    <string name="channel_default">Primary Channel</string>
 </resources>
